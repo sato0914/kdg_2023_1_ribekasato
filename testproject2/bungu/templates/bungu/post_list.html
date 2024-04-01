@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div id="contents">
+
+<div id="main">
+
+<section>
+
+<h2>ブログ一覧</h2>
+
+<table class="table">
+    <tbody>
+      {% for post in post_list %}
+        <div class="list">
+        <a href="{% url 'post_detail' post.pk %}">
+        <img src="{{ post.thumbnail.url }}" class="img"/>
+        <h4>{{ post.title }}</h4>
+        <p>{{ post.date }}</p>
+        <p>カテゴリー：{{ post.category }}</p>
+        </a>
+        </div>
+      {% endfor %}
+    </tbody>
+</table>
+{% include "bungu/pagination.html" %}
+</section>
+
+</div>
+<!--/main-->
+{% endblock content %}
+</body>
+</html>

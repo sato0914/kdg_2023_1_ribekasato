@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>{% block title %}{% endblock title %}ペット交流サイト</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ここにサイト説明を入れます">
+<meta name="keywords" content="キーワード１,キーワード２,キーワード３,キーワード４,キーワード５">
+<link rel="stylesheet" href="{% static 'bungu/css/style.css' %}">
+<link rel="stylesheet" href="{% static 'bungu/css/fixmenu_pagetop.css' %}">
+<script type="text/javascript" src="{% static 'bungu/js/openclose.js' %}"></script>
+<script type="text/javascript" src="{% static 'bungu/js/fixmenu_pagetop.js' %}"></script>
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+
+<body>
+
+<div id="container">
+
+<header>
+<h1 id="logo"><a style="text-decoration:none;" href="{% url 'index' %}">ペット交流サイト</a></h1>
+{% include "bungu/search_form.html" %}
+{% if request.user.is_authenticated %}
+<p id="banner"><a style="text-decoration:none;" href="{% url 'accounts:logout' %}">ログアウト</a></p>
+{% else %}
+<p id="banner"><a style="text-decoration:none;" href="{% url 'accounts:login' %}">ログイン</a></p>
+<p id="kaiin"><a style="text-decoration:none;" href="{% url 'accounts:signup' %}">会員登録</a></p>
+{% endif %}
+</header>
+
+<!--PC用（801px以上端末）メニュー-->
+<nav id="menubar">
+    <ul>
+    <li class="current"><a href="{% url 'index' %}">HOME<span>トップページ</span></a></li>
+    <li><a href="{% url 'list_blog' %}">BLOG<span>ブログ一覧</span></a></li>
+    <li><a href="{% url 'create-blog' %}">POST<span>ブログ投稿</span></a></li>
+    <li><a href="{% url 'contact' %}">CONTACT<span>お問い合わせはこちらから</span></a></li>
+    </ul>
+</nav>
+{% block content %}{% endblock content %}
+<div id="sub">
+
+    <nav class="box">
+    <h2>最新ブログ</h2>
+    <ul class="submenu">
+    <li><a href="#">リンク</a></li>
+    <li><a href="#">リンク</a></li>
+    <li><a href="#">リンク</a></li>
+    <li><a href="#">リンク</a></li>
+    </ul>
+    </nav>
+    
+    <section class="box">
+    <h2>運営</h2>
+    <p class="c"><strong>ペット交流サイト管理者</strong><br>
+    <span class="mini1">東京都XX区XXXXビル3F<br>
+    TEL:03-0000-0000<br>
+    (AM9:00〜PM5:00 土日祝休み)</span></p>
+    </section>
+    
+</div>
+<!--/sub-->
+</div>
+<!--/contents-->
+<footer>
+    <small>Copyright&copy; <a href="{% url 'index' %}">ペット交流サイト</a> All Rights Reserved.</small>
+    <span class="pr"><a href="http://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
+</footer>
+    
+</div>
+<!--/container-->
+
+<!--小さな端末用（800px以下端末）メニュー-->
+<nav id="menubar-s">
+<ul>
+<li><a href="{% url 'index' %}">HOME<span>トップページ</span></a></li>
+<li><a href="{% url 'list_blog' %}">BLOG<span>ブログ一覧</span></a></li>
+<li><a href="{% url 'create-blog' %}">POST<span>ブログ投稿</span></a></li>
+<li><a href="{% url 'contact' %}">CONTACT<span>お問い合わせはこちらから</span></a></li>
+</ul>
+</nav>
+
+<p class="nav-fix-pos-pagetop"><a href="#">↑</a></p>
+
+<!--メニュー開閉ボタン-->
+<div id="menubar_hdr" class="close"></div>
+<!--メニューの開閉処理条件設定　900px以下-->
+<script type="text/javascript">
+if (OCwindowWidth() <= 900) {
+    open_close("menubar_hdr", "menubar-s");
+}
+</script>
+</body>
+</html>

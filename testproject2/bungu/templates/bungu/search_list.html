@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}検索{% endblock %}
+
+{%block content %}
+<div id="main">
+ <!-- formを追加 -->
+ <form action="" method="get">
+    <input name="query" value="{{ request.GET.query }}" type="text" />
+    <button type="submit">検索する</button>
+  </form>
+  <table border="1">
+    <tr>
+        <th>カテゴリー</th>
+    </tr>
+    {% for post in post_list %}
+    <tr>
+        <td>{{ post.category }}</td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+{% endblock content %}
+</body>
+</html>

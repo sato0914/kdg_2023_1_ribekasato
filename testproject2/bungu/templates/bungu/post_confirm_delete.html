@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div id="contents">
+
+<div id="main">
+
+<article>
+
+<h2>ブログ</h2>
+
+<figure class="mb15 c">
+    <img src="{{ post.thumbnail.url }}" alt="写真の説明を入れます">
+</figure>
+
+<table class="ta1">
+<tr>
+<th colspan="2" class="tamidashi">{{ post.title }}</th>
+</tr>
+<tr>
+  <!-- linebreaksbk を入れると改行タグでちゃんと改行して表示されるようになる -->
+  <td>{{ post.text | linebreaksbr}}</td>
+</tr>
+<tr>
+  <td>{{ post.date }}</td>
+</tr>
+</table>
+<h6 class="card-title">カテゴリー：{{object.category}}</h6>
+
+{% for comment in comments %}
+    <div class='border-bottom'>{{ comment.name }} {{ comment.created_at }}</div><div class='mt-2'>{{ comment.text }}</div>
+{% endfor %}
+
+<form action="" method="POST">
+    <p>こちらのデータを削除します。</p>
+    <button type="submit">送信</button>
+    {% csrf_token %}
+</form>
+</article>
+
+</div>
+<!--/main-->
+{% endblock content %}
+</body>
+</html>

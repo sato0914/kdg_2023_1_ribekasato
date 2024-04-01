@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div id="contents">
+
+<div id="main">
+
+<article>
+
+<h2>ブログ</h2>
+
+<figure class="mb15 c">
+    <img src="{{ post.thumbnail.url }}" alt="写真の説明を入れます">
+</figure>
+
+<table class="ta1">
+<tr>
+<th colspan="2" class="tamidashi">{{ post.title }}</th>
+</tr>
+<tr>
+  <!-- linebreaksbk を入れると改行タグでちゃんと改行して表示されるようになる -->
+  <td>{{ post.text | linebreaksbr}}</td>
+</tr>
+<tr>
+  <td>{{ post.date }}</td>
+</tr>
+</table>
+<h6 class="card-title">カテゴリー：{{object.category}}</h6>
+
+<h3 class="comment-title">コメント</h3>
+
+<!--コメント-->
+{% for comment in object.comment_set.all %}
+<div class="comment-list">
+    <div class='border-bottom'>{{ comment.name }} {{ comment.created_at }}</div>
+    <!--改行しないようlinebreaksを設定,URL要素に<a>要素を設定-->
+    <div class='mt-2'>{{ comment.text | linebreaks }}</div>
+</div>
+{% empty %}
+<p>コメントはありません</p>
+{% endfor %}
+
+<p><a href="{% url 'comment_create' post.pk %}" target="_blank" rel="nofollow">記事にコメントする</a></p>
+<a href="{% url 'list_blog' %}" class="btn btn-primary">一覧へ</a>
+<a href="{% url 'post_delete' object.pk %}" class="btn btn-primary">削除する</a>
+</article>
+
+</div>
+<!--/main-->
+{% endblock content %}
+</body>
+</html>
